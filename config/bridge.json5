@@ -1,0 +1,45 @@
+// Bonsai API bridge configuration for zenoh-bridge-ros2dds.
+// Change the lines marked EDIT. Reference:
+// https://github.com/eclipse-zenoh/zenoh-plugin-ros2dds
+{
+  scouting: {
+    multicast: {
+      /// Whether multicast scouting is enabled or not.
+      enabled: true,
+      /// The network interface used for multicast scouting.
+      interface: "eth0", // EDIT: your ethernet device on the direct link to Bonsai
+      /// Which type of Zenoh instances to automatically establish sessions with
+      /// upon discovery. The bridge runs as a router, and two routers do not
+      /// connect to each other by default, so this is required to reach Bonsai.
+      autoconnect: { router: ["router", "peer"], peer: ["router", "peer"] },
+    },
+  },
+
+  /// Connect directly to Bonsai's bridge by IP instead of discovering it over
+  /// multicast. Use this when the two hosts are not on the same multicast segment.
+  // connect: { endpoints: ["tcp/<bonsai-ip>:7447"] }, // EDIT: brain IP, port 7447
+
+  /// The list of endpoints to listen on. 7447 is the Zenoh default; any free
+  /// port works. Change it if another Zenoh instance already uses this one.
+  listen: { endpoints: ["tcp/[::]:7448"] },
+
+  plugins: {
+    ros2dds: {
+      /// The DDS Domain ID. Defaults to 0, or to $ROS_DOMAIN_ID if that
+      /// environment variable is defined.
+      domain: 0, // EDIT: your local DDS domain
+
+      /// Optional allow/deny filter for the bridged topics, as regular
+      /// expressions. When unset, every topic Bonsai exposes is bridged. See the
+      /// plugin reference for the schema.
+      // allow: {
+      //   subscribers: [".*/image_compressed_raw", "/lidar/points/zstd"],
+      // },
+    },
+
+    /// The REST plugin serves the bridge admin API on any free port. Query it to
+    /// check the link:
+    ///   curl -s localhost:18000/@/*/router | jq '.[0].value.sessions'
+    rest: { http_port: "18000" },
+  },
+}

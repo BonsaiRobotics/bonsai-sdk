@@ -1,0 +1,19 @@
+# Parameters for the decoder nodes. The /** key applies them to every node name,
+# so decode.launch.py and decode_all.launch.py share this one file.
+/**:
+  ros__parameters:
+    # string. libav decoder to use, or several comma-separated. Empty selects one
+    # automatically: hardware decoders first, then software.
+    #   ""                 auto
+    #   "hevc_nvv4l2dec"   Orin hardware
+    #   "hevc_cuvid,hevc"  desktop NVIDIA, then software
+    decoder: ""
+
+    # string. Published image encoding: bgr8, rgb8, or mono8.
+    output_encoding: bgr8
+
+    # int. Subscription queue depth.
+    queue_depth: 4
+
+    # bool. Reliable QoS. Set false only for a best-effort publisher.
+    reliable_input: true

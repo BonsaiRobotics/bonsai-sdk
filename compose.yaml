@@ -1,0 +1,10 @@
+# Configure config/bridge.json5, then: docker compose up --build
+services:
+  bonsai-api-bridge:
+    build:
+      context: .
+      network: host # Jetson: default build network fails (no iptable_raw)
+    network_mode: host
+    restart: always
+    volumes:
+      - ./config/bridge.json5:/bridge.json5:ro

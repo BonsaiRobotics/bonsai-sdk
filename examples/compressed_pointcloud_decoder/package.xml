@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>compressed_pointcloud_decoder</name>
+  <version>1.0.0</version>
+  <description>
+    Decodes `point_cloud_interfaces/CompressedPointCloud2` messages into
+    `sensor_msgs/PointCloud2` messages using the `point_cloud_transport` zstd plugin.
+    Subscribes with reliable QoS to receive every message.
+  </description>
+  <maintainer email="anas.saeed@bonsairobotics.ai">Anas Saeed</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>rclcpp</depend>
+  <depend>sensor_msgs</depend>
+  <depend>point_cloud_interfaces</depend>
+  <depend>point_cloud_transport</depend>
+  <depend>zstd_point_cloud_transport</depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
