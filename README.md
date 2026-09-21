@@ -55,8 +55,8 @@ using one of:
 - `interface`: the ethernet device on the direct link, for example `eth0`. The bridge
   discovers Bonsai over multicast on that device.
 - `connect`: the brain's address, if you know its static IP. Uncomment
-  `connect: { endpoints: ["tcp/<bonsai-ip>:7447"] }` and replace `<bonsai-ip>` with the
-  brain's IP. Bonsai's bridge listens on port 7447.
+  `connect: { endpoints: ["tcp/<bonsai-ip>:7448"] }` and replace `<bonsai-ip>` with the
+  brain's IP. Bonsai's bridge listens on port 7448.
 
 If your local DDS domain is not 0, also set `domain`. Every field is documented in the
 file.
